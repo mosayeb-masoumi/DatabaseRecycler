@@ -26,20 +26,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         FrameLayout fLayout = (FrameLayout) findViewById(R.id.activity_to_do);
-        RecyclerView productView = (RecyclerView)findViewById(R.id.product_list);
+        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.product_list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        productView.setLayoutManager(linearLayoutManager);
-        productView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setHasFixedSize(true);
 
         mDatabase = new SqliteDatabase(this);
 
         List<ModelProduct> allModelProducts = mDatabase.listProducts();
         if(allModelProducts.size() > 0){
-            productView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.VISIBLE);
             ProductAdapter mAdapter = new ProductAdapter(this, allModelProducts);
-            productView.setAdapter(mAdapter);
+            recyclerView.setAdapter(mAdapter);
         }else {
-            productView.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.GONE);
             Toast.makeText(this, "There is no product in the database. Start adding now", Toast.LENGTH_LONG).show();
         }
 
